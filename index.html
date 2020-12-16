@@ -1,20 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<head>
-		<title>{Lalafell}{Master}{Race}</title>
-		<style>
-		    iframe {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;	
-			}
-		</style>
-	</head>
-	<body>
-		<div>
-			<iframe src="https://www.youtube.com/embed/videoseries?list=PLkp55nbokg3HO3Vj3LsuJiQ0J1xCBo8md&amp;controls=1&amp;showinfo=0&modestbranding=1&loop=1&autoplay=1&index=22" frameborder="0" allowfullscreen></iframe>
-		</div>
-	</body>
+  <head>
+    <meta charset="utf-8">
+    <title>PopotoCraft :: Starchiest Minecraft server to be in WIP. {Lalafell}{Master}{Race}</title>
+    <style>
+      html,body{margin:0;height:100%;}body{background:#DD5400}
+      .flake {
+        position: absolute;
+        cursor: default; 
+        -webkit-user-select: none; 
+        -moz-user-select: none; 
+        -ms-user-select: none; 
+        -o-user-select: none; 
+        user-select: none;
+        width: 16px;
+        height: 16px;
+        background-repeat: no-repeat;
+        background-size: auto;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAhUExURQAAAJpVAJ13LtmqUciXOq+EROm6Ym03AfjQhoZpPgAAAHFW9h4AAAALdFJOU/////////////8ASk8B8gAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAFpJREFUKFOlzMsOgCAMRFH7hv7/BzttWRi2TkjMPUSevPYHCKvvAIJFraSB2EQUB1JA4u6C1mgg9bUa9gEBVDMPhBrubbqBTfE/R3U/Gtvs5EAG1oU1fHdB5gtPIgf7t7m7LAAAAABJRU5ErkJggg==);
+      }
+    </style>
+  </head>
+<body>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <span class="flake"></span>
+  <script>
+    var snowSpeed = 0.75;
+    var snowMinSize = 16;
+    var snowMaxSize = 32;
+    var snowRefresh = 50;
+
+    var snow = [],
+      pos = [],
+      coords = [],
+      lefr = [],
+      marginBottom,
+      marginRight;
+
+    function randomise(range) {
+      rand = Math.floor(range * Math.random());
+      return rand;
+    }
+
+    function initSnow() {
+      var snowSize = snowMaxSize - snowMinSize;
+      marginBottom = document.body.scrollHeight - 5;
+      marginRight = document.body.clientWidth - 15;
+
+      snow = document.getElementsByClassName("flake");
+      for (i = 0; i < snow.length; i++) {
+        coords[i] = 0;
+        lefr[i] = Math.random() * 15;
+        pos[i] = 0.03 + Math.random() / 10;
+        snow[i].size = randomise(snowSize) + snowMinSize;
+        snow[i].style.width = snow[i].size + "px";
+        snow[i].style.height = snow[i].size + "px";
+        snow[i].style.backgroundSize = snow[i].size + "px";
+        snow[i].sink = snowSpeed * snow[i].size / 5;
+        snow[i].posX = randomise(marginRight - snow[i].size);
+        snow[i].posY = randomise(2 * marginBottom - marginBottom - 2 * snow[i].size);
+        snow[i].style.left = snow[i].posX + "px";
+        snow[i].style.top = snow[i].posY + "px";
+      }
+
+      moveSnow();
+    }
+
+    function resize() {
+      marginBottom = document.body.scrollHeight - 10;
+      marginRight = document.body.clientWidth - 15;
+    }
+
+    function moveSnow() {
+      for (i = 0; i < snow.length; i++) {
+        coords[i] += pos[i];
+        snow[i].posY += snow[i].sink;
+        snow[i].style.left = snow[i].posX + lefr[i] * Math.sin(coords[i]) + "px";
+        snow[i].style.top = snow[i].posY + "px";
+
+        if (snow[i].posY >= marginBottom - 1 * snow[i].size || parseInt(snow[i].style.left) > (marginRight - 3 * lefr[i])) {
+          snow[i].posX = randomise(marginRight - snow[i].size);
+          snow[i].posY = 0;
+        }
+      }
+
+      setTimeout("moveSnow()", snowRefresh);
+    }
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('load', initSnow);
+
+  </script>
+</body>
 </html>
